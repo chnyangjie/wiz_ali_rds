@@ -44,10 +44,10 @@ setup(
     packages=find_packages(where='src'),
     python_requires='>=3.6, <4',
     install_requires=['aliyun-python-sdk-rds'],
-    py_modules=['wiz_ali-rds'],
+    py_modules=['wiz_ali_rds'],
     project_urls={
-        'Bug Reports': 'https://github.com/chnyangjie/wiz_ali-rds/issues',
-        'Say Thanks!': 'https://github.com/chnyangjie/wiz_ali-rds/issues',
-        'Source': 'https://github.com/chnyangjie/wiz_ali-rds',
+        'Bug Reports': 'https://github.com/chnyangjie/wiz_ali_rds/issues',
+        'Say Thanks!': 'https://github.com/chnyangjie/wiz_ali_rds/issues',
+        'Source': 'https://github.com/chnyangjie/wiz_ali_rds',
     },
 )
