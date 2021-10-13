@@ -6,6 +6,7 @@ import sys
 from aliyunsdkcore.client import AcsClient
 from aliyunsdkrds.request.v20140815.DescribeDBInstancePerformanceRequest import DescribeDBInstancePerformanceRequest
 from aliyunsdkrds.request.v20140815.DescribeDBInstancesRequest import DescribeDBInstancesRequest
+from aliyunsdkrds.request.v20140815.DescribeDatabasesRequest import DescribeDatabasesRequest
 from aliyunsdkrds.request.v20140815.DescribeSlowLogRecordsRequest import DescribeSlowLogRecordsRequest
 
 
@@ -24,6 +25,26 @@ class AliRdsClient(object):
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         pass
+
+    def query_database_list(self, instance_id: str):
+        logging.info("query for rds list")
+        page = 0
+        size = 100
+        database_list = []
+
+        while True:
+            page += 1
+            request = DescribeDatabasesRequest()
+            request.set_DBInstanceId(instance_id)
+            request.set_PageNumber(page)
+            request.set_PageSize(size)
+            response = self.client.do_action_with_exception(request).decode()
+            response = json.loads(response)
+            databases = response['Databases']['Database']
+            database_list += databases
+            if len(databases) < size:
+                break
+        return database_list
 
     def query_rds_instance_metrics(self, instance_id: str, metrics_name_list: list, start_timestamp: float,
                                    end_timestamp: float):
